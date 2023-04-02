@@ -123,7 +123,7 @@ index 51b3db0b6c2cede95b584268e035c0fb36d38094..a7e133f3495e9132a5fdae2c24f225e7
                  DedicatedServer.LOGGER.warn("While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.");
              }
 diff --git a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
-index 3fcd7bfdb8945b276c94a263e9da6b85ce470366..3431b1132e55c53cda7cf47f021f23068b63322d 100644
+index d372a1dbd1ebad99757a1ad44c7dc577272388f0..08bcb271482bc4d6f4c636de84db456380ffdc55 100644
 --- a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
 @@ -61,6 +61,7 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
@@ -163,8 +163,8 @@ index 3fcd7bfdb8945b276c94a263e9da6b85ce470366..3431b1132e55c53cda7cf47f021f2306
 +                        // Paper end
                          String playerName = ServerLoginPacketListenerImpl.this.gameProfile.getName();
                          java.net.InetAddress address = ((java.net.InetSocketAddress) ServerLoginPacketListenerImpl.this.connection.getRemoteAddress()).getAddress();
-                         java.net.InetAddress rawAddress = ((java.net.InetSocketAddress) connection.channel.remoteAddress()).getAddress(); // Paper
-@@ -411,6 +428,47 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
+                         // Paper start
+@@ -417,6 +434,47 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
      // Spigot end
  
      public void handleCustomQueryPacket(ServerboundCustomQueryPacket packet) {
@@ -213,7 +213,7 @@ index 3fcd7bfdb8945b276c94a263e9da6b85ce470366..3431b1132e55c53cda7cf47f021f2306
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 2a9b967e40909ccd4727c1ca81b57b6ca9ce4f05..f9a9d2bb7b6d1bf4a0931438de4d8c7ee0757479 100644
+index e5eb2ae544f13918f62a5b85e7d4b8b8085a8293..4cd95134811fd65465681d159b2f30cf77455830 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -774,7 +774,7 @@ public final class CraftServer implements Server {

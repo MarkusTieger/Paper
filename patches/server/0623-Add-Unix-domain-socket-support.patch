@@ -7,8 +7,9 @@ For Windows and ARM support, JEP-380 is required:
 https://inside.java/2021/02/03/jep380-unix-domain-sockets-channels/
 This will be possible as of the Minecraft 1.17 Java version bump.
 
-Tested-by: Mariell Hoversholm <proximyst@proximyst.com>
-Reviewed-by: Mariell Hoversholm <proximyst@proximyst.com>
+Co-authored-by: MarkusTieger <markustieger@gmail.com>
+Tested-by: MarkusTieger <markustieger@gmail.com>
+Reviewed-by: MarkusTieger <markustieger@gmail.com>
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 index 8eb18e794845a2e7df5e7e6bc11134e4d132e06e..7dcffb49a982a8db00d66441a03e2951b1d29ff9 100644
@@ -139,3 +140,51 @@ index 7675adce108df5790a34f90145a8fabcf9704c0f..de25fde984d17a3228803a8a274372b0
                              connection.spoofedUUID = com.mojang.util.UUIDTypeAdapter.fromString( split[2] );
                          } else
                          {
+diff --git a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
+index b026c003e1fc02a9ea426f3126acb788fc09a874..ae89c1de091054d3a207411e23eb7b303001b988 100644
+--- a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
++++ b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
+@@ -331,7 +331,13 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
+         public void fireEvents() throws Exception {
+                         String playerName = ServerLoginPacketListenerImpl.this.gameProfile.getName();
+                         java.net.InetAddress address = ((java.net.InetSocketAddress) ServerLoginPacketListenerImpl.this.connection.getRemoteAddress()).getAddress();
+-                        java.net.InetAddress rawAddress = ((java.net.InetSocketAddress) connection.channel.remoteAddress()).getAddress(); // Paper
++                        // Paper start
++                        java.net.SocketAddress rawSocketAddress = connection.channel.remoteAddress();
++                        java.net.InetAddress rawAddress = InetAddress.getLoopbackAddress();
++                        if(rawSocketAddress != null && rawSocketAddress instanceof InetSocketAddress rawInetSocketAddress) {
++                    	    rawAddress = rawInetSocketAddress.getAddress();
++                        }
++                        // Paper end
+                         java.util.UUID uniqueId = ServerLoginPacketListenerImpl.this.gameProfile.getId();
+                         final org.bukkit.craftbukkit.CraftServer server = ServerLoginPacketListenerImpl.this.server.server;
+ 
+diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
+index 8d9d730b4fe3be9cc5965331614c3969ec4ad3f9..27b5a56a10ccfd06e050338f2b6f82f8cfe672c8 100644
+--- a/src/main/java/net/minecraft/server/players/PlayerList.java
++++ b/src/main/java/net/minecraft/server/players/PlayerList.java
+@@ -11,6 +11,8 @@ import com.mojang.serialization.Dynamic;
+ import io.netty.buffer.Unpooled;
+ import io.papermc.paper.adventure.PaperAdventure;
+ import java.io.File;
++import java.net.InetAddress;
++import java.net.InetSocketAddress;
+ import java.net.SocketAddress;
+ import java.nio.file.Path;
+ import java.text.SimpleDateFormat;
+@@ -678,7 +680,14 @@ public abstract class PlayerList {
+ 
+         ServerPlayer entity = new ServerPlayer(this.server, this.server.getLevel(Level.OVERWORLD), gameprofile);
+         Player player = entity.getBukkitEntity();
+-        PlayerLoginEvent event = new PlayerLoginEvent(player, loginlistener.connection.hostname, ((java.net.InetSocketAddress) socketaddress).getAddress(), ((java.net.InetSocketAddress) loginlistener.connection.channel.remoteAddress()).getAddress());
++        
++        InetAddress rawAddress = InetAddress.getLoopbackAddress();
++        SocketAddress rawSocketAddress = loginlistener.connection.channel.remoteAddress();
++        if(rawSocketAddress != null && rawSocketAddress instanceof InetSocketAddress rawInetSocketAddress) {
++     	   rawAddress = rawInetSocketAddress.getAddress();
++        }
++        
++        PlayerLoginEvent event = new PlayerLoginEvent(player, loginlistener.connection.hostname, ((java.net.InetSocketAddress) socketaddress).getAddress(), rawAddress);
+ 
+         // Paper start - Fix MC-158900
+         UserBanListEntry gameprofilebanentry;

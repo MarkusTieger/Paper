@@ -31,7 +31,7 @@ index e5e2f763d9b4b955df79ea0c4c79565be1fe59f0..2beddfc0532c3835d50724551e3d46cb
  
                              networkmanager.send(new ClientboundDisconnectPacket(ichatmutablecomponent), PacketSendListener.thenRun(() -> {
 diff --git a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
-index 595779cfd0ee1c405d7936f00a7cae1706125e7f..ed3af916dfa875dd0a5f1e730d20d11efd6419c6 100644
+index b3a05e5fb3a8f5d2a910f401a7c368c7ed343df6..5e696f0f1a19cc72b3f972429f0608e2deace413 100644
 --- a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
 @@ -206,7 +206,10 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
@@ -47,10 +47,10 @@ index 595779cfd0ee1c405d7936f00a7cae1706125e7f..ed3af916dfa875dd0a5f1e730d20d11e
  
      @Override
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index d84b976364b0ffc4b7356c6791d70f0e34deff48..9f73627c20d341afc57f287019e40bbbe574733e 100644
+index f0f68bb3b5bdd4f4f562c59ed984b7a0ecdfd069..00183712a6a1eaecef8f9d174f2c69c36c14f1e5 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -245,7 +245,7 @@ public abstract class PlayerList {
+@@ -247,7 +247,7 @@ public abstract class PlayerList {
          String s1 = "local";
  
          if (connection.getRemoteAddress() != null) {

@@ -1202,10 +1202,10 @@ index d9719e544261b9d2dc85fa9936ae23ea8e8dd08c..5afb17ccc16e614e91ff3cad2f714b4a
              }
          }
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 9f73627c20d341afc57f287019e40bbbe574733e..85d5efe606f71d729fb1b1271d661b205a0ae324 100644
+index 00183712a6a1eaecef8f9d174f2c69c36c14f1e5..180a5944cd75ecc174c24ce503e263d6276a2745 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -885,7 +885,7 @@ public abstract class PlayerList {
+@@ -894,7 +894,7 @@ public abstract class PlayerList {
          // CraftBukkit end
  
          worldserver1.getChunkSource().addRegionTicket(net.minecraft.server.level.TicketType.POST_TELEPORT, new net.minecraft.world.level.ChunkPos(location.getBlockX() >> 4, location.getBlockZ() >> 4), 1, entityplayer.getId()); // Paper

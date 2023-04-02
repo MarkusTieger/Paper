@@ -79,10 +79,10 @@ index f86b9e5e34aa8716a9f560c2f271936175f641b3..04386413177d0fb1338fccabf8af5746
                              }
  
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 377093456d4e701a6fcfb9ed053acbfdb6247cf4..f09fe42ecf1660f1ee1cdaa632d387cc5f736150 100644
+index 11b4335a46a28a372eb2eb66980ff2d9315ec656..7cbf1c26582830972140195833379f0e289bfe9f 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -361,7 +361,7 @@ public abstract class PlayerList {
+@@ -363,7 +363,7 @@ public abstract class PlayerList {
          ((ServerLevel)player.level).getChunkSource().chunkMap.addEntity(player); // Paper - track entity now
          // CraftBukkit end
  
